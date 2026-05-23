@@ -1,4 +1,9 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/da# ElevateLend
+
+Premium Australian Business Lending Marketplace.
+
+Compare 75+ Australian business lenders in minutes. Fast approvals, competitive rates, no credit hit.
+cs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
