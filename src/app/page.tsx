@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -348,18 +347,15 @@ export default function HomePage() {
       <Header />
 
       {/* ============================================================ */}
-      {/*  HERO — Pure CSS animations (no framer-motion)                */}
+      {/*  HERO                                                         */}
       {/* ============================================================ */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-navy-900">
-        {/* Background grid + gradient */}
         <div className="absolute inset-0 grid-pattern" />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-800/90 to-navy-900" />
-        {/* Radial glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/5 rounded-full blur-3xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left content — CSS animated */}
             <div>
               <div className="hero-animate hero-animate-d1">
                 <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
@@ -397,7 +393,6 @@ export default function HomePage() {
                 </a>
               </div>
 
-              {/* Trust badges */}
               <div className="hero-animate hero-animate-d5 mt-10 flex flex-wrap items-center gap-6 text-sm text-navy-400">
                 <div className="flex items-center gap-2 group cursor-default">
                   <ShieldCheck className="w-4 h-4 text-success transition-transform group-hover:scale-125" />
@@ -414,9 +409,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: Hero image + Floating stat cards — CSS animated */}
             <div className="hidden lg:block relative h-[500px]">
-              {/* Hero image */}
               <div className="hero-animate hero-animate-d2 absolute inset-0 rounded-3xl overflow-hidden">
                 <img
                   src="/images/hero-business-owner.jpg"
@@ -425,7 +418,6 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent rounded-3xl" />
               </div>
-              {/* Card 1 */}
               <div className="absolute top-4 right-8 animate-float hero-card-animate hero-card-d1">
                 <div className="glass rounded-2xl p-6 min-w-[220px] stat-glow">
                   <div className="flex items-center gap-3 mb-3">
@@ -437,12 +429,7 @@ export default function HomePage() {
                   <p className="text-3xl font-bold text-white">$2.4B+</p>
                 </div>
               </div>
-
-              {/* Card 2 */}
-              <div
-                className="absolute top-44 left-0 animate-float hero-card-animate hero-card-d2"
-                style={{ animationDelay: "2s" }}
-              >
+              <div className="absolute top-44 left-0 animate-float hero-card-animate hero-card-d2" style={{ animationDelay: "2s" }}>
                 <div className="glass rounded-2xl p-6 min-w-[200px] stat-glow">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-xl bg-success/20 flex items-center justify-center">
@@ -453,32 +440,21 @@ export default function HomePage() {
                   <p className="text-3xl font-bold text-white">93%</p>
                 </div>
               </div>
-
-              {/* Card 3 */}
-              <div
-                className="absolute bottom-8 right-16 animate-float hero-card-animate hero-card-d3"
-                style={{ animationDelay: "4s" }}
-              >
+              <div className="absolute bottom-8 right-16 animate-float hero-card-animate hero-card-d3" style={{ animationDelay: "4s" }}>
                 <div className="glass rounded-2xl p-6 min-w-[220px] stat-glow">
                   <div className="flex items-center gap-2 mb-2">
                     {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-gold-400 text-gold-400"
-                      />
+                      <Star key={i} className="w-4 h-4 fill-gold-400 text-gold-400" />
                     ))}
                   </div>
                   <p className="text-2xl font-bold text-white">4.9 / 5</p>
-                  <p className="text-sm text-white/50 mt-1">
-                    from 680+ reviews
-                  </p>
+                  <p className="text-sm text-white/50 mt-1">from 680+ reviews</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
@@ -498,11 +474,7 @@ export default function HomePage() {
                 <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-navy-50 to-white border border-navy-100 gradient-border group hover:shadow-lg transition-shadow duration-300">
                   <AnimatedIcon icon={stat.icon} colorClass={stat.color} delay={i * 0.1} />
                   <div className="text-3xl sm:text-4xl font-extrabold text-navy-900">
-                    {stat.value === 4.9 ? (
-                      "4.9/5"
-                    ) : (
-                      <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-                    )}
+                    {stat.value === 4.9 ? "4.9/5" : <AnimatedCounter target={stat.value} suffix={stat.suffix} />}
                   </div>
                   <p className="text-sm text-navy-500 mt-1 font-medium">{stat.label}</p>
                 </div>
@@ -519,16 +491,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">
-                Our Products
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">
-                Funding solutions for every business need
-              </h2>
-              <p className="mt-4 text-navy-500">
-                From fast unsecured loans to long-term property finance, we
-                connect you with the right product at the best rate.
-              </p>
+              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">Our Products</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">Funding solutions for every business need</h2>
+              <p className="mt-4 text-navy-500">From fast unsecured loans to long-term property finance, we connect you with the right product at the best rate.</p>
             </div>
           </FadeInSection>
 
@@ -539,15 +504,9 @@ export default function HomePage() {
                   <Card hover className="group h-full">
                     <CardContent className="p-6">
                       <AnimatedIcon icon={product.icon} colorClass={product.color} delay={i * 0.05} />
-                      <h3 className="text-lg font-bold text-navy-900 mb-1">
-                        {product.title}
-                      </h3>
-                      <p className="text-sm font-semibold text-gold-500 mb-3">
-                        {product.range}
-                      </p>
-                      <p className="text-sm text-navy-500 leading-relaxed">
-                        {product.description}
-                      </p>
+                      <h3 className="text-lg font-bold text-navy-900 mb-1">{product.title}</h3>
+                      <p className="text-sm font-semibold text-gold-500 mb-3">{product.range}</p>
+                      <p className="text-sm text-navy-500 leading-relaxed">{product.description}</p>
                       <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-navy-700 group-hover:text-gold-600 transition-colors">
                         Learn more
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -562,32 +521,22 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  LIFESTYLE FEATURE — Image + Text split                       */}
+      {/*  LIFESTYLE FEATURE                                            */}
       {/* ============================================================ */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeInSection>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="/images/lifestyle-handshake.jpg"
-                  alt="Business owner shaking hands with broker"
-                  className="w-full h-[400px] object-cover"
-                />
+                <img src="/images/lifestyle-handshake.jpg" alt="Business owner shaking hands with broker" className="w-full h-[400px] object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900/30 to-transparent" />
               </div>
             </FadeInSection>
             <FadeInSection delay={0.2}>
               <div>
-                <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">
-                  Why ElevateLend
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900 mb-6">
-                  Your growth partner, not just a comparison site
-                </h2>
-                <p className="text-navy-500 leading-relaxed mb-6">
-                  We go beyond simple rate comparison. Our team of lending specialists works directly with you to understand your business goals, negotiate better terms, and ensure you get the right funding structure — not just the cheapest rate.
-                </p>
+                <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">Why ElevateLend</span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900 mb-6">Your growth partner, not just a comparison site</h2>
+                <p className="text-navy-500 leading-relaxed mb-6">We go beyond simple rate comparison. Our team of lending specialists works directly with you to understand your business goals, negotiate better terms, and ensure you get the right funding structure.</p>
                 <div className="space-y-4">
                   {[
                     { icon: ShieldCheck, text: "Dedicated lending specialist assigned to your case" },
@@ -615,41 +564,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">
-                How it Works
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">
-                Three simple steps to better funding
-              </h2>
+              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">How it Works</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">Three simple steps to better funding</h2>
             </div>
           </FadeInSection>
 
           <div className="relative grid md:grid-cols-3 gap-8 lg:gap-12">
-            {/* Connecting line (desktop) */}
             <div className="hidden md:block absolute top-16 left-[16.66%] right-[16.66%] h-0.5 bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 opacity-20" />
-
             {[
-              {
-                step: "01",
-                icon: ClipboardList,
-                title: "Tell us what you need",
-                desc: "Complete our 2-minute application. We only ask what matters — no paperwork, no fuss.",
-                detail: "2-minute form",
-              },
-              {
-                step: "02",
-                icon: Search,
-                title: "We match you to lenders",
-                desc: "Our smart algorithm compares your profile against 75+ lenders to find the best fit.",
-                detail: "Smart matching",
-              },
-              {
-                step: "03",
-                icon: CheckCircle2,
-                title: "Compare offers & get funded",
-                desc: "Review tailored offers, choose the best deal, and receive funds — often within 24 hours.",
-                detail: "24hr funding",
-              },
+              { step: "01", icon: ClipboardList, title: "Tell us what you need", desc: "Complete our 2-minute application. We only ask what matters — no paperwork, no fuss.", detail: "2-minute form" },
+              { step: "02", icon: Search, title: "We match you to lenders", desc: "Our smart algorithm compares your profile against 75+ lenders to find the best fit.", detail: "Smart matching" },
+              { step: "03", icon: CheckCircle2, title: "Compare offers & get funded", desc: "Review tailored offers, choose the best deal, and receive funds — often within 24 hours.", detail: "24hr funding" },
             ].map((item, i) => (
               <FadeInSection key={item.step} delay={i * 0.15}>
                 <div className="relative text-center">
@@ -661,15 +586,9 @@ export default function HomePage() {
                       {item.step}
                     </div>
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-navy-900">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-navy-500 max-w-xs mx-auto leading-relaxed">
-                    {item.desc}
-                  </p>
-                  <span className="inline-block mt-3 text-xs font-bold text-gold-500 uppercase tracking-wider">
-                    {item.detail}
-                  </span>
+                  <h3 className="mt-6 text-xl font-bold text-navy-900">{item.title}</h3>
+                  <p className="mt-2 text-sm text-navy-500 max-w-xs mx-auto leading-relaxed">{item.desc}</p>
+                  <span className="inline-block mt-3 text-xs font-bold text-gold-500 uppercase tracking-wider">{item.detail}</span>
                 </div>
               </FadeInSection>
             ))}
@@ -695,54 +614,19 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center mb-12">
-              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">
-                Our Partners
-              </span>
-              <h2 className="text-3xl font-extrabold text-navy-900">
-                Trusted by 75+ Australian lenders
-              </h2>
+              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">Our Partners</span>
+              <h2 className="text-3xl font-extrabold text-navy-900">Trusted by 75+ Australian lenders</h2>
             </div>
           </FadeInSection>
-          {/* Scrolling lender logos */}
           <div className="relative">
             <div className="flex gap-8 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
-              {[
-                "Prospa",
-                "OnDeck",
-                "Moula",
-                "Lumi",
-                "Zip Business",
-                "ScotPac",
-                "Judo Bank",
-                "GetCapital",
-                "Butn",
-                "Shift",
-                "Banjo",
-                "Funding",
-                "Bizcap",
-                "Thinktank",
-                "Liberty",
-                "Pepper Money",
-                "La Trobe",
-                "Metro Finance",
-                "Resimac",
-                "Grow Finance",
-              ].map((name) => (
-                <div
-                  key={name}
-                  className="inline-flex items-center justify-center min-w-[150px] h-16 rounded-xl bg-white border border-navy-100 px-6 text-sm font-semibold text-navy-400 hover:border-gold-300 hover:text-navy-600 transition-colors duration-300"
-                >
+              {["Prospa","OnDeck","Moula","Lumi","Zip Business","ScotPac","Judo Bank","GetCapital","Butn","Shift","Banjo","Funding","Bizcap","Thinktank","Liberty","Pepper Money","La Trobe","Metro Finance","Resimac","Grow Finance"].map((name) => (
+                <div key={name} className="inline-flex items-center justify-center min-w-[150px] h-16 rounded-xl bg-white border border-navy-100 px-6 text-sm font-semibold text-navy-400 hover:border-gold-300 hover:text-navy-600 transition-colors duration-300">
                   {name}
                 </div>
               ))}
             </div>
           </div>
-          <style jsx>{`
-            @keyframes scroll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-          `}</style>
         </div>
       </section>
 
@@ -753,16 +637,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">
-                Testimonials
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">
-                Businesses that elevated their funding
-              </h2>
+              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">Testimonials</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">Businesses that elevated their funding</h2>
             </div>
           </FadeInSection>
 
-          {/* First row: 3 cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-6">
             {testimonials.slice(0, 3).map((t, i) => (
               <FadeInSection key={t.name} delay={i * 0.1}>
@@ -786,4 +665,90 @@ export default function HomePage() {
                   </CardContent>
                 </Card>
               </FadeInSection>
-         
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {testimonials.slice(3).map((t, i) => (
+              <FadeInSection key={t.name} delay={(i + 3) * 0.1}>
+                <Card className="h-full relative overflow-hidden gradient-border group hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <Quote className="w-8 h-8 text-gold-200 mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(t.rating)].map((_, j) => (
+                        <Star key={j} className="w-4 h-4 fill-gold-400 text-gold-400" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-navy-600 leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
+                    <div className="mt-6 pt-4 border-t border-navy-100 flex items-center gap-3">
+                      <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+                      <div>
+                        <p className="font-semibold text-navy-900 text-sm">{t.name}</p>
+                        <p className="text-xs text-navy-500">{t.business}</p>
+                        <p className="text-xs text-navy-400">{t.location}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </FadeInSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  CTA                                                          */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-navy-900 relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-500/5 rounded-full blur-3xl" />
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <FadeInSection>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Ready to elevate your business funding?</h2>
+            <p className="text-navy-300 text-lg mb-8 max-w-xl mx-auto">
+              Join 1,200+ Australian businesses who found better rates, faster approvals, and smarter lending through ElevateLend.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/apply">
+                <Button variant="primary" size="xl">
+                  Get My Free Quote
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+              <a href="tel:1300000000">
+                <Button variant="secondary-light" size="xl">
+                  Call 1300 000 000
+                </Button>
+              </a>
+            </div>
+            <p className="mt-6 text-sm text-navy-400">No credit impact &middot; Free comparison &middot; Takes 2 minutes</p>
+          </FadeInSection>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  FAQ                                                          */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-gray-50/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">FAQ</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">Common questions, clear answers</h2>
+            </div>
+          </FadeInSection>
+
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <FadeInSection key={i} delay={i * 0.05}>
+                <FAQItem q={faq.q} a={faq.a} />
+              </FadeInSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
