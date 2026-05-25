@@ -235,7 +235,7 @@ const testimonials = [
     name: "Sarah Mitchell",
     business: "Mitchell & Co Construction",
     location: "Sydney, NSW",
-    avatar: "/images/avatar-sarah.png",
+    avatar: "/images/avatar-sarah.jpg",
     quote:
       "ElevateLend matched us with a lender in under 4 hours. We secured $350k for equipment at a rate 2% lower than our bank offered. Incredible service.",
     rating: 5,
@@ -244,7 +244,7 @@ const testimonials = [
     name: "James Huang",
     business: "Jade Garden Restaurants",
     location: "Melbourne, VIC",
-    avatar: "/images/avatar-james.png",
+    avatar: "/images/avatar-james.jpg",
     quote:
       "The application took 5 minutes. Within 24 hours we had three offers to choose from. The team guided us through every step. Highly recommend.",
     rating: 5,
@@ -253,9 +253,27 @@ const testimonials = [
     name: "Lisa Thompson",
     business: "Thompson Transport Group",
     location: "Brisbane, QLD",
-    avatar: "/images/avatar-lisa.png",
+    avatar: "/images/avatar-lisa.jpg",
     quote:
       "We needed fleet finance fast. ElevateLend delivered. Five new trucks financed in a week. Their lender network is unmatched in Australia.",
+    rating: 5,
+  },
+  {
+    name: "David Chen",
+    business: "TechVault Solutions",
+    location: "Perth, WA",
+    avatar: "/images/avatar-david.jpg",
+    quote:
+      "As a tech startup, banks wouldn't touch us. ElevateLend connected us with a fintech lender who understood our model. $200k approved in 48 hours.",
+    rating: 5,
+  },
+  {
+    name: "Rachel Porter",
+    business: "Porter & Co Retail",
+    location: "Adelaide, SA",
+    avatar: "/images/avatar-rachel.jpg",
+    quote:
+      "We expanded from one store to three using ElevateLend. The comparison process saved us thousands in interest. Couldn't have done it without them.",
     rating: 5,
   },
 ];
@@ -396,8 +414,17 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: Floating stat cards — CSS animated */}
+            {/* Right: Hero image + Floating stat cards — CSS animated */}
             <div className="hidden lg:block relative h-[500px]">
+              {/* Hero image */}
+              <div className="hero-animate hero-animate-d2 absolute inset-0 rounded-3xl overflow-hidden">
+                <img
+                  src="/images/hero-business-owner.jpg"
+                  alt="Business owner in modern office"
+                  className="w-full h-full object-cover opacity-40 rounded-3xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent rounded-3xl" />
+              </div>
               {/* Card 1 */}
               <div className="absolute top-4 right-8 animate-float hero-card-animate hero-card-d1">
                 <div className="glass rounded-2xl p-6 min-w-[220px] stat-glow">
@@ -535,9 +562,56 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
+      {/*  LIFESTYLE FEATURE — Image + Text split                       */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <FadeInSection>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="/images/lifestyle-handshake.jpg"
+                  alt="Business owner shaking hands with broker"
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/30 to-transparent" />
+              </div>
+            </FadeInSection>
+            <FadeInSection delay={0.2}>
+              <div>
+                <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">
+                  Why ElevateLend
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900 mb-6">
+                  Your growth partner, not just a comparison site
+                </h2>
+                <p className="text-navy-500 leading-relaxed mb-6">
+                  We go beyond simple rate comparison. Our team of lending specialists works directly with you to understand your business goals, negotiate better terms, and ensure you get the right funding structure — not just the cheapest rate.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { icon: ShieldCheck, text: "Dedicated lending specialist assigned to your case" },
+                    { icon: TrendingUp, text: "Access to exclusive rates not available direct" },
+                    { icon: Clock, text: "Average 4-hour turnaround from application to offer" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                        <item.icon className="w-4 h-4 text-gold-500" />
+                      </div>
+                      <span className="text-sm text-navy-700 font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeInSection>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
       {/*  HOW IT WORKS                                                 */}
       {/* ============================================================ */}
-      <section id="how-it-works" className="py-24 bg-white">
+      <section id="how-it-works" className="py-24 bg-gray-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center max-w-2xl mx-auto mb-16">
@@ -688,29 +762,21 @@ export default function HomePage() {
             </div>
           </FadeInSection>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
+          {/* First row: 3 cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-6">
+            {testimonials.slice(0, 3).map((t, i) => (
               <FadeInSection key={t.name} delay={i * 0.1}>
                 <Card className="h-full relative overflow-hidden gradient-border group hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="p-6 flex flex-col h-full">
                     <Quote className="w-8 h-8 text-gold-200 mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
                     <div className="flex gap-1 mb-4">
                       {[...Array(t.rating)].map((_, j) => (
-                        <Star
-                          key={j}
-                          className="w-4 h-4 fill-gold-400 text-gold-400"
-                        />
+                        <Star key={j} className="w-4 h-4 fill-gold-400 text-gold-400" />
                       ))}
                     </div>
-                    <p className="text-sm text-navy-600 leading-relaxed flex-1">
-                      &ldquo;{t.quote}&rdquo;
-                    </p>
+                    <p className="text-sm text-navy-600 leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
                     <div className="mt-6 pt-4 border-t border-navy-100 flex items-center gap-3">
-                      <img
-                        src={t.avatar}
-                        alt={t.name}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
+                      <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
                       <div>
                         <p className="font-semibold text-navy-900 text-sm">{t.name}</p>
                         <p className="text-xs text-navy-500">{t.business}</p>
@@ -722,6 +788,102 @@ export default function HomePage() {
               </FadeInSection>
             ))}
           </div>
+          {/* Second row: 2 cards centered */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {testimonials.slice(3).map((t, i) => (
+              <FadeInSection key={t.name} delay={(i + 3) * 0.1}>
+                <Card className="h-full relative overflow-hidden gradient-border group hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <Quote className="w-8 h-8 text-gold-200 mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(t.rating)].map((_, j) => (
+                        <Star key={j} className="w-4 h-4 fill-gold-400 text-gold-400" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-navy-600 leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
+                    <div className="mt-6 pt-4 border-t border-navy-100 flex items-center gap-3">
+                      <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+                      <div>
+                        <p className="font-semibold text-navy-900 text-sm">{t.name}</p>
+                        <p className="text-xs text-navy-500">{t.business}</p>
+                        <p className="text-xs text-navy-400">{t.location}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </FadeInSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  MEET THE TEAM                                                */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-gray-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeInSection>
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <span className="inline-block text-xs font-bold tracking-widest text-gold-500 uppercase mb-3">
+                Our Team
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-900">
+                Meet the lending specialists
+              </h2>
+              <p className="mt-4 text-navy-500">
+                Our experienced team combines decades of finance industry knowledge to find you the best deal.
+              </p>
+            </div>
+          </FadeInSection>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: "Alex Harrison", role: "Lending Director", image: "/images/team-member-1.jpg" },
+              { name: "Priya Sharma", role: "Senior Broker", image: "/images/team-member-2.jpg" },
+              { name: "Michael Torres", role: "Commercial Specialist", image: "/images/team-member-3.jpg" },
+              { name: "Sophie Bennett", role: "Client Success Lead", image: "/images/team-member-4.jpg" },
+            ].map((member, i) => (
+              <FadeInSection key={member.name} delay={i * 0.1}>
+                <div className="text-center group">
+                  <div className="relative w-48 h-48 mx-auto mb-5 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <h3 className="text-lg font-bold text-navy-900">{member.name}</h3>
+                  <p className="text-sm text-gold-500 font-medium">{member.role}</p>
+                </div>
+              </FadeInSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  LIFESTYLE BANNER — Full width image strip                    */}
+      {/* ============================================================ */}
+      <section className="py-0 overflow-hidden">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+          {[
+            { src: "/images/lifestyle-storefront.jpg", alt: "Australian business storefront" },
+            { src: "/images/lifestyle-loan-docs.jpg", alt: "Reviewing loan documents" },
+            { src: "/images/lifestyle-warehouse.jpg", alt: "Warehouse business operations" },
+            { src: "/images/lifestyle-property-keys.jpg", alt: "Commercial property handover" },
+          ].map((img, i) => (
+            <FadeInSection key={img.src} delay={i * 0.1}>
+              <div className="relative h-48 md:h-64 overflow-hidden group">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-navy-900/20 group-hover:bg-navy-900/10 transition-colors duration-300" />
+              </div>
+            </FadeInSection>
+          ))}
         </div>
       </section>
 
