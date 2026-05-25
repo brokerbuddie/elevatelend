@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -96,7 +96,54 @@ function FadeInSection({
       className={className}
     >
       {children}
-    </div>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Animated Icon with bounce-in and hover effects                     */
+/* ------------------------------------------------------------------ */
+function AnimatedIcon({
+  icon: Icon,
+  colorClass,
+  delay = 0,
+}: {
+  icon: React.ElementType;
+  colorClass: string;
+  delay?: number;
+}) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${colorClass} flex items-center justify-center mb-4 icon-container-hover group/icon overflow-visible`}
+      initial={{ scale: 0, rotate: -30 }}
+      animate={inView ? { scale: 1, rotate: 0 } : {}}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+        delay: delay,
+      }}
+      whileHover={{
+        scale: 1.1,
+        rotate: [0, -5, 5, 0],
+        transition: { duration: 0.5 },
+      }}
+    >
+      {/* Morphing blob background */}
+      <div className="blob-bg" />
+      {/* Orbiting particle */}
+      <div className="orbit-dot" />
+      {/* Floating particles */}
+      <div className="particle" style={{ top: "-8px", left: "50%", animationDelay: "0s" }} />
+      <div className="particle" style={{ bottom: "-6px", right: "-4px", animationDelay: "1s" }} />
+      <div className="particle" style={{ top: "50%", left: "-6px", animationDelay: "2s" }} />
+      {/* Icon */}
+      <Icon className="relative z-10 w-7 h-7 text-navy-700 icon-animate-hover" />
+    </motion.div>
   );
 }
 
@@ -107,42 +154,42 @@ const products = [
   {
     icon: Building2,
     title: "Small Business Loan",
-    range: "$10k – $750k",
+    range: "$10k â $750k",
     description: "Flexible funding for growth, working capital, and expansion. Fast approval with competitive rates.",
     color: "from-blue-500/10 to-blue-600/5",
   },
   {
     icon: CreditCard,
     title: "Line of Credit",
-    range: "$5k – $750k",
+    range: "$5k â $750k",
     description: "Revolving credit facility. Draw funds as needed and only pay interest on what you use.",
     color: "from-purple-500/10 to-purple-600/5",
   },
   {
     icon: Car,
     title: "Vehicle Finance",
-    range: "$10k – $500k",
+    range: "$10k â $500k",
     description: "Cars, utes, trucks, and fleet. Competitive rates with flexible balloon payment options.",
     color: "from-emerald-500/10 to-emerald-600/5",
   },
   {
     icon: Wrench,
     title: "Equipment Finance",
-    range: "$10k – $1M",
+    range: "$10k â $1M",
     description: "Finance machinery, technology, and equipment. Preserve cash flow with fixed repayments.",
     color: "from-amber-500/10 to-amber-600/5",
   },
   {
     icon: Landmark,
     title: "Commercial Property",
-    range: "$200k – $5M",
+    range: "$200k â $5M",
     description: "Purchase, refinance, or develop commercial and industrial property with tailored solutions.",
     color: "from-rose-500/10 to-rose-600/5",
   },
   {
     icon: Receipt,
     title: "Tax & ATO Debt",
-    range: "$10k – $750k",
+    range: "$10k â $750k",
     description: "Resolve ATO obligations quickly. Consolidate tax debts with structured repayment plans.",
     color: "from-cyan-500/10 to-cyan-600/5",
   },
@@ -156,7 +203,7 @@ const testimonials = [
     name: "Sarah Mitchell",
     business: "Mitchell & Co Construction",
     location: "Sydney, NSW",
-        avatar: "/images/avatar-sarah.png",
+    avatar: "/images/avatar-sarah.png",
     quote:
       "ElevateLend matched us with a lender in under 4 hours. We secured $350k for equipment at a rate 2% lower than our bank offered. Incredible service.",
     rating: 5,
@@ -165,7 +212,7 @@ const testimonials = [
     name: "James Huang",
     business: "Jade Garden Restaurants",
     location: "Melbourne, VIC",
-        avatar: "/images/avatar-james.png",
+    avatar: "/images/avatar-james.png",
     quote:
       "The application took 5 minutes. Within 24 hours we had three offers to choose from. The team guided us through every step. Highly recommend.",
     rating: 5,
@@ -174,7 +221,7 @@ const testimonials = [
     name: "Lisa Thompson",
     business: "Thompson Transport Group",
     location: "Brisbane, QLD",
-        avatar: "/images/avatar-lisa.png",
+    avatar: "/images/avatar-lisa.png",
     quote:
       "We needed fleet finance fast. ElevateLend delivered. Five new trucks financed in a week. Their lender network is unmatched in Australia.",
     rating: 5,
@@ -223,11 +270,12 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         className="w-full flex items-center justify-between p-5 text-left hover:bg-navy-50/50 transition-colors cursor-pointer"
       >
         <span className="text-base font-semibold text-navy-900 pr-4">{q}</span>
-        {open ? (
-          <ChevronUp className="w-5 h-5 text-gold-500 shrink-0" />
-        ) : (
-          <ChevronDown className="w-5 h-5 text-navy-400 shrink-0" />
-        )}
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ChevronDown className={`w-5 h-5 shrink-0 ${open ? "text-gold-500" : "text-navy-400"}`} />
+        </motion.div>
       </button>
       <motion.div
         initial={false}
@@ -236,7 +284,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         className="overflow-hidden"
       >
         <p className="px-5 pb-5 text-sm text-navy-500 leading-relaxed">{a}</p>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -285,8 +333,8 @@ export default function HomePage() {
                 className="hero-animate-delay-2 mt-6 text-lg text-navy-300 max-w-xl leading-relaxed"
               >
                 Compare 75+ Australian lenders in one free application. No credit
-                hit, no obligations — just the best rates matched to your
-                business in minutes.
+                hit, no obligations â just the best rates matched to your
+                   business in minutes.
               </p>
 
               <div
@@ -305,78 +353,125 @@ export default function HomePage() {
                 </a>
               </div>
 
-              {/* Trust badges */}
+              {/* Trust badges - animated icons */}
               <div
                 className="hero-animate-delay-4 mt-10 flex flex-wrap items-center gap-6 text-sm text-navy-400"
               >
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-success" />
+                <motion.div
+                  className="flex items-center gap-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                >
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                  >
+                    <ShieldCheck className="w-4 h-4 text-success" />
+                  </motion.div>
                   <span>No credit hit</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-gold-400" />
+                </motion.div>
+                <motion.div
+                  className="flex items-center gap-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.0, duration: 0.5 }}
+                >
+                  <motion.div
+                    animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.3, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 4 }}
+                  >
+                    <Zap className="w-4 h-4 text-gold-400" />
+                  </motion.div>
                   <span>24-hour funding</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-blue-400" />
+                </motion.div>
+                <motion.div
+                  className="flex items-center gap-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.2, duration: 0.5 }}
+                >
+                  <motion.div
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 2 }}
+                  >
+                    <Users className="w-4 h-4 text-blue-400" />
+                  </motion.div>
                   <span>75+ lenders</span>
-                </div>
+                </motion.div>
               </div>
             </div>
 
             {/* Right: Floating stat cards */}
             <div className="hidden lg:block relative h-[500px]">
               {/* Card 1 */}
-              <div
-                className="hero-animate-delay-5 absolute top-4 right-8 animate-float"
+              <motion.div
+                className="absolute top-4 right-8"
+                initial={{ opacity: 0, y: 40, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="glass rounded-2xl p-6 min-w-[220px]">
+                <div className="animate-float glass rounded-2xl p-6 min-w-[220px]">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center">
+                    <motion.div
+                      className="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center"
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    >
                       <TrendingUp className="w-5 h-5 text-gold-400" />
-                    </div>
+                    </motion.div>
                     <span className="text-sm text-white/60">Total Funded</span>
                   </div>
                   <p className="text-3xl font-bold text-white">$2.4B+</p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Card 2 */}
-              <div
-                className="hero-animate-delay-5 absolute top-44 left-0 animate-float"
-                style={{ animationDelay: "2s" }}
+              <motion.div
+                className="absolute top-44 left-0"
+                initial={{ opacity: 0, x: -40, scale: 0.8 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="glass rounded-2xl p-6 min-w-[200px]">
+                <div className="animate-float glass rounded-2xl p-6 min-w-[200px]" style={{ animationDelay: "2s" }}>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-success/20 flex items-center justify-center">
+                    <motion.div
+                      className="w-10 h-10 rounded-xl bg-success/20 flex items-center justify-center"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
                       <BadgeCheck className="w-5 h-5 text-success" />
-                    </div>
+                    </motion.div>
                     <span className="text-sm text-white/60">Approval Rate</span>
                   </div>
                   <p className="text-3xl font-bold text-white">93%</p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Card 3 */}
-              <div
-                className="hero-animate-delay-5 absolute bottom-8 right-16 animate-float"
-                style={{ animationDelay: "4s" }}
+              <motion.div
+                className="absolute bottom-8 right-16"
+                initial={{ opacity: 0, y: 40, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 1.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="glass rounded-2xl p-6 min-w-[220px]">
+                <div className="animate-float glass rounded-2xl p-6 min-w-[220px]" style={{ animationDelay: "4s" }}>
                   <div className="flex items-center gap-2 mb-2">
                     {[...Array(5)].map((_, i) => (
-                      <Star
+                      <motion.div
                         key={i}
-                        className="w-4 h-4 fill-gold-400 text-gold-400"
-                      />
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 1.4 + i * 0.1 }}
+                      >
+                        <Star className="w-4 h-4 fill-gold-400 text-gold-400" />
+                      </motion.div>
                     ))}
                   </div>
                   <p className="text-2xl font-bold text-white">4.9 / 5</p>
-                  <p className="text-sm text-white/50 mt-1">
-                    from 680+ reviews
-                  </p>
+                  <p className="text-sm text-white/50 mt-1">from 680+ reviews</p>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -398,9 +493,14 @@ export default function HomePage() {
               { value: 4.9, suffix: "/5", label: "Customer Rating", icon: Star },
             ].map((stat, i) => (
               <FadeInSection key={stat.label} delay={i * 0.1}>
-                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-navy-50 to-white border border-navy-100">
-                  <stat.icon className="w-8 h-8 text-gold-500 mx-auto mb-3" />
-                  <div className="text-3xl sm:text-4xl font-extrabold text-navy-900">
+                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-navy-50 to-white border border-navy-100 gradient-border group">
+                  <motion.div
+                    whileHover={{ scale: 1.2, rotate: 10 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <stat.icon className="w-8 h-8 text-gold-500 mx-auto mb-3 icon-animate-hover" />
+                  </motion.div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-navy-900 stat-glow">
                     {stat.value === 4.9 ? (
                       "4.9/5"
                     ) : (
@@ -439,13 +539,13 @@ export default function HomePage() {
             {products.map((product, i) => (
               <FadeInSection key={product.title} delay={i * 0.08}>
                 <Link href="/apply">
-                  <Card hover className="group h-full">
+                  <Card hover className="group h-full gradient-border">
                     <CardContent className="p-6">
-                      <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${product.color} flex items-center justify-center mb-4`}
-                      >
-                        <product.icon className="w-6 h-6 text-navy-700" />
-                      </div>
+                      <AnimatedIcon
+                        icon={product.icon}
+                        colorClass={product.color}
+                        delay={i * 0.08}
+                      />
                       <h3 className="text-lg font-bold text-navy-900 mb-1">
                         {product.title}
                       </h3>
@@ -455,10 +555,13 @@ export default function HomePage() {
                       <p className="text-sm text-navy-500 leading-relaxed">
                         {product.description}
                       </p>
-                      <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-navy-700 group-hover:text-gold-600 transition-colors">
+                      <motion.div
+                        className="mt-4 flex items-center gap-1 text-sm font-semibold text-navy-700 group-hover:text-gold-600 transition-colors"
+                        whileHover={{ x: 4 }}
+                      >
                         Learn more
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </div>
+                      </motion.div>
                     </CardContent>
                   </Card>
                 </Link>
@@ -493,7 +596,7 @@ export default function HomePage() {
                 step: "01",
                 icon: ClipboardList,
                 title: "Tell us what you need",
-                desc: "Complete our 2-minute application. We only ask what matters — no paperwork, no fuss.",
+                desc: "Complete our 2-minute application. We only ask what matters â no paperwork, no fuss.",
                 detail: "2-minute form",
               },
               {
@@ -507,19 +610,45 @@ export default function HomePage() {
                 step: "03",
                 icon: CheckCircle2,
                 title: "Compare offers & get funded",
-                desc: "Review tailored offers, choose the best deal, and receive funds — often within 24 hours.",
+                desc: "Review tailored offers, choose the best deal, and receive funds â often within 24 hours.",
                 detail: "24hr funding",
               },
             ].map((item, i) => (
               <FadeInSection key={item.step} delay={i * 0.15}>
-                <div className="relative text-center">
+                <div className="relative text-center group">
                   <div className="relative inline-flex">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-navy-50 to-white border-2 border-navy-100 flex items-center justify-center mx-auto">
-                      <item.icon className="w-12 h-12 text-navy-700" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 flex items-center justify-center text-sm font-extrabold text-navy-900 shadow-lg shadow-gold-500/25">
+                    <motion.div
+                      className="w-32 h-32 rounded-full bg-gradient-to-br from-navy-50 to-white border-2 border-navy-100 flex items-center justify-center mx-auto step-circle-animate"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <motion.div
+                        animate={{
+                          y: [0, -4, 0],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          delay: i * 0.5,
+                        }}
+                      >
+                        <item.icon className="w-12 h-12 text-navy-700" />
+                      </motion.div>
+                    </motion.div>
+                    <motion.div
+                      className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 flex items-center justify-center text-sm font-extrabold text-navy-900 shadow-lg shadow-gold-500/25"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 15,
+                        delay: 0.3 + i * 0.15,
+                      }}
+                    >
                       {item.step}
-                    </div>
+                    </motion.div>
                   </div>
                   <h3 className="mt-6 text-xl font-bold text-navy-900">
                     {item.title}
@@ -563,46 +692,24 @@ export default function HomePage() {
               </h2>
             </div>
           </FadeInSection>
-          {/* Scrolling lender logos — placeholder names */}
+          {/* Scrolling lender logos */}
           <div className="relative">
-            <div className="flex gap-8 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
+            <div className="flex gap-8 whitespace-nowrap" style={{ animation: "scroll 30s linear infinite" }}>
               {[
-                "Prospa",
-                "OnDeck",
-                "Moula",
-                "Lumi",
-                "Zip Business",
-                "ScotPac",
-                "Judo Bank",
-                "GetCapital",
-                "Butn",
-                "Shift",
-                "Banjo",
-                "Funding",
-                "Bizcap",
-                "Thinktank",
-                "Liberty",
-                "Pepper Money",
-                "La Trobe",
-                "Metro Finance",
-                "Resimac",
-                "Grow Finance",
+                "Prospa", "OnDeck", "Moula", "Lumi", "Zip Business",
+                "ScotPac", "Judo Bank", "GetCapital", "Butn", "Shift",
+                "Banjo", "Funding", "Bizcap", "Thinktank", "Liberty",
+                "Pepper Money", "La Trobe", "Metro Finance", "Resimac", "Grow Finance",
               ].map((name) => (
                 <div
                   key={name}
-                  className="inline-flex items-center justify-center min-w-[150px] h-16 rounded-xl bg-white border border-navy-100 px-6 text-sm font-semibold text-navy-400"
+                  className="inline-flex items-center justify-center min-w-[150px] h-16 rounded-xl bg-white border border-navy-100 px-6 text-sm font-semibold text-navy-400 hover:border-gold-300 hover:text-navy-700 transition-all duration-300 hover:shadow-md"
                 >
                   {name}
                 </div>
               ))}
             </div>
           </div>
-          <style jsx>{`
-            @keyframes scroll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-          `}</style>
         </div>
       </section>
 
@@ -625,31 +732,40 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
               <FadeInSection key={t.name} delay={i * 0.1}>
-                <Card className="h-full relative overflow-hidden">
+                <Card className="h-full relative overflow-hidden group gradient-border">
                   <CardContent className="p-6 flex flex-col h-full">
-                    <Quote className="w-8 h-8 text-gold-200 mb-4" />
+                    <motion.div
+                      initial={{ rotate: 0 }}
+                      whileHover={{ rotate: 12, scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Quote className="w-8 h-8 text-gold-200 mb-4" />
+                    </motion.div>
                     <div className="flex gap-1 mb-4">
                       {[...Array(t.rating)].map((_, j) => (
-                        <Star
+                        <motion.div
                           key={j}
-                          className="w-4 h-4 fill-gold-400 text-gold-400"
-                        />
+                          whileHover={{ scale: 1.3, rotate: 15 }}
+                          transition={{ type: "spring" }}
+                        >
+                          <Star className="w-4 h-4 fill-gold-400 text-gold-400" />
+                        </motion.div>
                       ))}
                     </div>
                     <p className="text-sm text-navy-600 leading-relaxed flex-1">
                       &ldquo;{t.quote}&rdquo;
                     </p>
                     <div className="mt-6 pt-4 border-t border-navy-100 flex items-center gap-3">
-                                            <img
-                                                                      src={t.avatar}
-                                                                      alt={t.name}
-                                                                      className="w-10 h-10 rounded-full object-cover"
-                                                                    />
-                                            <div>
-                      <p className="font-semibold text-navy-900 text-sm">{t.name}</p>
-                      <p className="text-xs text-navy-500">{t.business}</p>
-                      <p className="text-xs text-navy-400">{t.location}</p>
-                                            </div>
+                      <img
+                        src={t.avatar}
+                        alt={t.name}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div>
+                        <p className="font-semibold text-navy-900 text-sm">{t.name}</p>
+                        <p className="text-xs text-navy-500">{t.business}</p>
+                        <p className="text-xs text-navy-400">{t.location}</p>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -716,18 +832,42 @@ export default function HomePage() {
               </a>
             </div>
             <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-navy-400">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-success" />
+              <motion.div
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                >
+                  <ShieldCheck className="w-4 h-4 text-success" />
+                </motion.div>
                 No credit hit
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-gold-400" />
+              </motion.div>
+              <motion.div
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+              >
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 4 }}
+                >
+                  <Zap className="w-4 h-4 text-gold-400" />
+                </motion.div>
                 2-min application
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-blue-400" />
+              </motion.div>
+              <motion.div
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.15, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 2 }}
+                >
+                  <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                </motion.div>
                 100% free
-              </div>
+              </motion.div>
             </div>
           </FadeInSection>
         </div>
