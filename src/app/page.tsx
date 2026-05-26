@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -46,7 +45,8 @@ function AnimatedCounter({
 }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [inView, setInView] = useState(false);
+  useEffect(() => { if (!ref.current) return; const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } }, { threshold: 0.1 }); obs.observe(ref.current); return () => obs.disconnect(); }, []);
 
   useEffect(() => {
     if (!inView) return;
@@ -86,13 +86,11 @@ function FadeInSection({
   delay?: number;
 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-20px" });
+  const [inView, setInView] = useState(false);
+  useEffect(() => { if (!ref.current) return; const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } }, { threshold: 0.1 }); obs.observe(ref.current); return () => obs.disconnect(); }, []);
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    <div
+      ref={ref}} : {}}}
       className={className}
     >
       {children}
@@ -107,42 +105,42 @@ const products = [
   {
     icon: Building2,
     title: "Small Business Loan",
-    range: "$10k – $750k",
+    range: "$10k â $750k",
     description: "Flexible funding for growth, working capital, and expansion. Fast approval with competitive rates.",
     color: "from-blue-500/10 to-blue-600/5",
   },
   {
     icon: CreditCard,
     title: "Line of Credit",
-    range: "$5k – $750k",
+    range: "$5k â $750k",
     description: "Revolving credit facility. Draw funds as needed and only pay interest on what you use.",
     color: "from-purple-500/10 to-purple-600/5",
   },
   {
     icon: Car,
     title: "Vehicle Finance",
-    range: "$10k – $500k",
+    range: "$10k â $500k",
     description: "Cars, utes, trucks, and fleet. Competitive rates with flexible balloon payment options.",
     color: "from-emerald-500/10 to-emerald-600/5",
   },
   {
     icon: Wrench,
     title: "Equipment Finance",
-    range: "$10k – $1M",
+    range: "$10k â $1M",
     description: "Finance machinery, technology, and equipment. Preserve cash flow with fixed repayments.",
     color: "from-amber-500/10 to-amber-600/5",
   },
   {
     icon: Landmark,
     title: "Commercial Property",
-    range: "$200k – $5M",
+    range: "$200k â $5M",
     description: "Purchase, refinance, or develop commercial and industrial property with tailored solutions.",
     color: "from-rose-500/10 to-rose-600/5",
   },
   {
     icon: Receipt,
     title: "Tax & ATO Debt",
-    range: "$10k – $750k",
+    range: "$10k â $750k",
     description: "Resolve ATO obligations quickly. Consolidate tax debts with structured repayment plans.",
     color: "from-cyan-500/10 to-cyan-600/5",
   },
@@ -229,10 +227,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
           <ChevronDown className="w-5 h-5 text-navy-400 shrink-0" />
         )}
       </button>
-      <motion.div
-        initial={false}
-        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      <div}}
         className="overflow-hidden"
       >
         <p className="px-5 pb-5 text-sm text-navy-500 leading-relaxed">{a}</p>
@@ -285,7 +280,7 @@ export default function HomePage() {
                 className="hero-animate-delay-2 mt-6 text-lg text-navy-300 max-w-xl leading-relaxed"
               >
                 Compare 75+ Australian lenders in one free application. No credit
-                hit, no obligations — just the best rates matched to your
+                hit, no obligations â just the best rates matched to your
                 business in minutes.
               </p>
 
@@ -493,7 +488,7 @@ export default function HomePage() {
                 step: "01",
                 icon: ClipboardList,
                 title: "Tell us what you need",
-                desc: "Complete our 2-minute application. We only ask what matters — no paperwork, no fuss.",
+                desc: "Complete our 2-minute application. We only ask what matters â no paperwork, no fuss.",
                 detail: "2-minute form",
               },
               {
@@ -507,7 +502,7 @@ export default function HomePage() {
                 step: "03",
                 icon: CheckCircle2,
                 title: "Compare offers & get funded",
-                desc: "Review tailored offers, choose the best deal, and receive funds — often within 24 hours.",
+                desc: "Review tailored offers, choose the best deal, and receive funds â often within 24 hours.",
                 detail: "24hr funding",
               },
             ].map((item, i) => (

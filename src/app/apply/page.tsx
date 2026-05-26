@@ -69,19 +69,19 @@ const LOAN_PURPOSES = [
 
 const MONTHLY_REVENUE_OPTIONS = [
   { value: "under-5k", label: "Under $5k" },
-  { value: "5k-10k", label: "$5k – $10k" },
-  { value: "10k-20k", label: "$10k – $20k" },
-  { value: "20k-50k", label: "$20k – $50k" },
-  { value: "50k-100k", label: "$50k – $100k" },
-  { value: "100k-250k", label: "$100k – $250k" },
+  { value: "5k-10k", label: "$5k â $10k" },
+  { value: "10k-20k", label: "$10k â $20k" },
+  { value: "20k-50k", label: "$20k â $50k" },
+  { value: "50k-100k", label: "$50k â $100k" },
+  { value: "100k-250k", label: "$100k â $250k" },
   { value: "250k-plus", label: "$250k+" },
 ];
 
 const YEARS_IN_BUSINESS_OPTIONS = [
   { value: "0-6", label: "< 6 months" },
-  { value: "6-12", label: "6 – 12 months" },
-  { value: "1-2", label: "1 – 2 years" },
-  { value: "2-5", label: "2 – 5 years" },
+  { value: "6-12", label: "6 â 12 months" },
+  { value: "1-2", label: "1 â 2 years" },
+  { value: "2-5", label: "2 â 5 years" },
   { value: "5-plus", label: "5+ years" },
 ];
 
@@ -106,8 +106,8 @@ const INDUSTRY_OPTIONS = [
 
 const CREDIT_SCORE_OPTIONS = [
   { value: "excellent", label: "Excellent (800+)" },
-  { value: "good", label: "Good (700 – 799)" },
-  { value: "fair", label: "Fair (500 – 699)" },
+  { value: "good", label: "Good (700 â 799)" },
+  { value: "fair", label: "Fair (500 â 699)" },
   { value: "poor", label: "Poor (below 500)" },
   { value: "unknown", label: "Not sure" },
 ];
@@ -656,7 +656,7 @@ export default function ApplyPage() {
                         {formData.existingFacilities.map((f) => (
                           <div key={f.name} className="flex justify-between">
                             <dt className="text-navy-500">{f.name}</dt>
-                            <dd className="text-navy-800">{f.balance ? `$${f.balance}` : "—"}</dd>
+                            <dd className="text-navy-800">{f.balance ? `$${f.balance}` : "â"}</dd>
                           </div>
                         ))}
                       </>
@@ -1013,7 +1013,7 @@ export default function ApplyPage() {
                           inputMode="numeric"
                           placeholder="0"
                           value={f.balance || ""}
-                          onChang%={(e) => {
+                          onChange={(e) => {
                             const val = e.target.value.replace(/[^\d]/g, "");
                             updateLenderBalance(f.name, val);
                           }}
