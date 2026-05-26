@@ -45,24 +45,32 @@ function AnimatedCounter({
 }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => { if (!ref.current) return; const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } }, { threshold: 0.1 }); obs.observe(ref.current); return () => obs.disconnect(); }, []);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const increment = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [inView, target, duration]);
+    if (!ref.current || hasAnimated) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasAnimated(true);
+          let start = 0;
+          const increment = target / (duration / 16);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= target) {
+              setCount(target);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 16);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasAnimated, target, duration]);
 
   return (
     <span ref={ref}>
@@ -85,13 +93,33 @@ function FadeInSection({
   className?: string;
   delay?: number;
 }) {
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => { if (!ref.current) return; const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } }, { threshold: 0.1 }); obs.observe(ref.current); return () => obs.disconnect(); }, []);
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "-40px" }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      ref={ref}} : {}}}
-      className={className}
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${className}`}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(30px)",
+        transitionDelay: `${delay}s`,
+      }}
     >
       {children}
     </div>
@@ -227,7 +255,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
           <ChevronDown className="w-5 h-5 text-navy-400 shrink-0" />
         )}
       </button>
-      <div}}
+      <div
         className="overflow-hidden"
       >
         <p className="px-5 pb-5 text-sm text-navy-500 leading-relaxed">{a}</p>
