@@ -133,42 +133,42 @@ const products = [
   {
     icon: Building2,
     title: "Small Business Loan",
-    range: "$10k Ã¢ÂÂ $750k",
+    range: "$10k ÃÂ¢ÃÂÃÂ $750k",
     description: "Flexible funding for growth, working capital, and expansion. Fast approval with competitive rates.",
     color: "from-blue-500/10 to-blue-600/5",
   },
   {
     icon: CreditCard,
     title: "Line of Credit",
-    range: "$5k Ã¢ÂÂ $750k",
+    range: "$5k ÃÂ¢ÃÂÃÂ $750k",
     description: "Revolving credit facility. Draw funds as needed and only pay interest on what you use.",
     color: "from-purple-500/10 to-purple-600/5",
   },
   {
     icon: Car,
     title: "Vehicle Finance",
-    range: "$10k Ã¢ÂÂ $500k",
+    range: "$10k ÃÂ¢ÃÂÃÂ $500k",
     description: "Cars, utes, trucks, and fleet. Competitive rates with flexible balloon payment options.",
     color: "from-emerald-500/10 to-emerald-600/5",
   },
   {
     icon: Wrench,
     title: "Equipment Finance",
-    range: "$10k Ã¢ÂÂ $1M",
+    range: "$10k ÃÂ¢ÃÂÃÂ $1M",
     description: "Finance machinery, technology, and equipment. Preserve cash flow with fixed repayments.",
     color: "from-amber-500/10 to-amber-600/5",
   },
   {
     icon: Landmark,
     title: "Commercial Property",
-    range: "$200k Ã¢ÂÂ $5M",
+    range: "$200k ÃÂ¢ÃÂÃÂ $5M",
     description: "Purchase, refinance, or develop commercial and industrial property with tailored solutions.",
     color: "from-rose-500/10 to-rose-600/5",
   },
   {
     icon: Receipt,
     title: "Tax & ATO Debt",
-    range: "$10k Ã¢ÂÂ $750k",
+    range: "$10k ÃÂ¢ÃÂÃÂ $750k",
     description: "Resolve ATO obligations quickly. Consolidate tax debts with structured repayment plans.",
     color: "from-cyan-500/10 to-cyan-600/5",
   },
@@ -308,7 +308,7 @@ export default function HomePage() {
                 className="hero-animate-delay-2 mt-6 text-lg text-navy-300 max-w-xl leading-relaxed"
               >
                 Compare 75+ Australian lenders in one free application. No credit
-                hit, no obligations Ã¢ÂÂ just the best rates matched to your
+                hit, no obligations ÃÂ¢ÃÂÃÂ just the best rates matched to your
                 business in minutes.
               </p>
 
@@ -516,7 +516,7 @@ export default function HomePage() {
                 step: "01",
                 icon: ClipboardList,
                 title: "Tell us what you need",
-                desc: "Complete our 2-minute application. We only ask what matters Ã¢ÂÂ no paperwork, no fuss.",
+                desc: "Complete our 2-minute application. We only ask what matters ÃÂ¢ÃÂÃÂ no paperwork, no fuss.",
                 detail: "2-minute form",
               },
               {
@@ -530,7 +530,7 @@ export default function HomePage() {
                 step: "03",
                 icon: CheckCircle2,
                 title: "Compare offers & get funded",
-                desc: "Review tailored offers, choose the best deal, and receive funds Ã¢ÂÂ often within 24 hours.",
+                desc: "Review tailored offers, choose the best deal, and receive funds ÃÂ¢ÃÂÃÂ often within 24 hours.",
                 detail: "24hr funding",
               },
             ].map((item, i) => (
@@ -589,7 +589,7 @@ export default function HomePage() {
           {/* Scrolling lender logos with real images */}
           <div className="relative overflow-hidden">
             <div className="flex gap-8 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
-              {{[
+              {[
                 { name: "ANZ", logo: "/images/lenders/anz.png" },
                 { name: "Banjo Loans", logo: "/images/lenders/banjo.png" },
                 { name: "Bendigo Bank", logo: "/images/lenders/bendigo.png" },
