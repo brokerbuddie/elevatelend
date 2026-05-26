@@ -133,42 +133,42 @@ const products = [
   {
     icon: Building2,
     title: "Small Business Loan",
-    range: "$10k â $750k",
+    range: "$10k Ã¢ÂÂ $750k",
     description: "Flexible funding for growth, working capital, and expansion. Fast approval with competitive rates.",
     color: "from-blue-500/10 to-blue-600/5",
   },
   {
     icon: CreditCard,
     title: "Line of Credit",
-    range: "$5k â $750k",
+    range: "$5k Ã¢ÂÂ $750k",
     description: "Revolving credit facility. Draw funds as needed and only pay interest on what you use.",
     color: "from-purple-500/10 to-purple-600/5",
   },
   {
     icon: Car,
     title: "Vehicle Finance",
-    range: "$10k â $500k",
+    range: "$10k Ã¢ÂÂ $500k",
     description: "Cars, utes, trucks, and fleet. Competitive rates with flexible balloon payment options.",
     color: "from-emerald-500/10 to-emerald-600/5",
   },
   {
     icon: Wrench,
     title: "Equipment Finance",
-    range: "$10k â $1M",
+    range: "$10k Ã¢ÂÂ $1M",
     description: "Finance machinery, technology, and equipment. Preserve cash flow with fixed repayments.",
     color: "from-amber-500/10 to-amber-600/5",
   },
   {
     icon: Landmark,
     title: "Commercial Property",
-    range: "$200k â $5M",
+    range: "$200k Ã¢ÂÂ $5M",
     description: "Purchase, refinance, or develop commercial and industrial property with tailored solutions.",
     color: "from-rose-500/10 to-rose-600/5",
   },
   {
     icon: Receipt,
     title: "Tax & ATO Debt",
-    range: "$10k â $750k",
+    range: "$10k Ã¢ÂÂ $750k",
     description: "Resolve ATO obligations quickly. Consolidate tax debts with structured repayment plans.",
     color: "from-cyan-500/10 to-cyan-600/5",
   },
@@ -308,7 +308,7 @@ export default function HomePage() {
                 className="hero-animate-delay-2 mt-6 text-lg text-navy-300 max-w-xl leading-relaxed"
               >
                 Compare 75+ Australian lenders in one free application. No credit
-                hit, no obligations â just the best rates matched to your
+                hit, no obligations Ã¢ÂÂ just the best rates matched to your
                 business in minutes.
               </p>
 
@@ -516,7 +516,7 @@ export default function HomePage() {
                 step: "01",
                 icon: ClipboardList,
                 title: "Tell us what you need",
-                desc: "Complete our 2-minute application. We only ask what matters â no paperwork, no fuss.",
+                desc: "Complete our 2-minute application. We only ask what matters Ã¢ÂÂ no paperwork, no fuss.",
                 detail: "2-minute form",
               },
               {
@@ -530,7 +530,7 @@ export default function HomePage() {
                 step: "03",
                 icon: CheckCircle2,
                 title: "Compare offers & get funded",
-                desc: "Review tailored offers, choose the best deal, and receive funds â often within 24 hours.",
+                desc: "Review tailored offers, choose the best deal, and receive funds Ã¢ÂÂ often within 24 hours.",
                 detail: "24hr funding",
               },
             ].map((item, i) => (
@@ -589,55 +589,48 @@ export default function HomePage() {
           {/* Scrolling lender logos with real images */}
           <div className="relative overflow-hidden">
             <div className="flex gap-8 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
-              {[
-                { name: "Prospa", domain: "prospa.com" },
-                { name: "OnDeck", domain: "ondeck.com.au" },
-                { name: "Moula", domain: "moula.com.au" },
-                { name: "Lumi", domain: "lumi.com.au" },
-                { name: "Zip Business", domain: "zip.co" },
-                { name: "ScotPac", domain: "scotpac.com.au" },
-                { name: "Judo Bank", domain: "judo.bank" },
-                { name: "GetCapital", domain: "getcapital.com.au" },
-                { name: "Butn", domain: "butn.co" },
-                { name: "Shift", domain: "shift.com.au" },
-                { name: "Banjo Loans", domain: "banjoloans.com" },
-                { name: "Bizcap", domain: "bizcap.com.au" },
-                { name: "Thinktank", domain: "thinktank.net.au" },
-                { name: "Liberty", domain: "liberty.com.au" },
-                { name: "Pepper Money", domain: "peppermoney.com.au" },
-                { name: "La Trobe", domain: "latrobefinancial.com.au" },
-                { name: "Metro Finance", domain: "metrofinance.com.au" },
-                { name: "Resimac", domain: "resimac.com.au" },
-                { name: "Grow Finance", domain: "growfinance.com.au" },
-                { name: "Capify", domain: "capify.com.au" },
-                { name: "Prospa", domain: "prospa.com" },
-                { name: "OnDeck", domain: "ondeck.com.au" },
-                { name: "Moula", domain: "moula.com.au" },
-                { name: "Lumi", domain: "lumi.com.au" },
-                { name: "Zip Business", domain: "zip.co" },
-                { name: "ScotPac", domain: "scotpac.com.au" },
-                { name: "Judo Bank", domain: "judo.bank" },
-                { name: "GetCapital", domain: "getcapital.com.au" },
-                { name: "Butn", domain: "butn.co" },
-                { name: "Shift", domain: "shift.com.au" },
-              ].map((l, i) => (
+              {{[
+                { name: "ANZ", logo: "/images/lenders/anz.png" },
+                { name: "Banjo Loans", logo: "/images/lenders/banjo.png" },
+                { name: "Bendigo Bank", logo: "/images/lenders/bendigo.png" },
+                { name: "Bizcap", logo: "/images/lenders/bizcap.png" },
+                { name: "CBA", logo: "/images/lenders/cba.png" },
+                { name: "Dynamoney", logo: "/images/lenders/dynamoney.png" },
+                { name: "Judo Bank", logo: "/images/lenders/judo.png" },
+                { name: "La Trobe", logo: "/images/lenders/latrobe.png" },
+                { name: "Liberty", logo: "/images/lenders/liberty.png" },
+                { name: "Macquarie", logo: "/images/lenders/macquarie.png" },
+                { name: "Metro Finance", logo: "/images/lenders/metro.png" },
+                { name: "Moula", logo: "/images/lenders/moula.png" },
+                { name: "NAB", logo: "/images/lenders/nab.png" },
+                { name: "OnDeck", logo: "/images/lenders/ondeck.png" },
+                { name: "Pepper Money", logo: "/images/lenders/pepper.png" },
+                { name: "Prospa", logo: "/images/lenders/prospa.png" },
+                { name: "Resimac", logo: "/images/lenders/resimac.png" },
+                { name: "ScotPac", logo: "/images/lenders/scotpac.png" },
+                { name: "Shift", logo: "/images/lenders/shift.png" },
+                { name: "Westpac", logo: "/images/lenders/westpac.png" },
+                { name: "ANZ", logo: "/images/lenders/anz.png" },
+                { name: "Banjo Loans", logo: "/images/lenders/banjo.png" },
+                { name: "Bendigo Bank", logo: "/images/lenders/bendigo.png" },
+                { name: "Bizcap", logo: "/images/lenders/bizcap.png" },
+                { name: "CBA", logo: "/images/lenders/cba.png" },
+                { name: "Dynamoney", logo: "/images/lenders/dynamoney.png" },
+                { name: "Judo Bank", logo: "/images/lenders/judo.png" },
+                { name: "La Trobe", logo: "/images/lenders/latrobe.png" },
+                { name: "Liberty", logo: "/images/lenders/liberty.png" },
+                { name: "Macquarie", logo: "/images/lenders/macquarie.png" },
+              ].map((lender, i) => (
                 <div
-                  key={`${l.name}-${i}`}
-                  className="inline-flex items-center justify-center min-w-[160px] h-20 rounded-xl bg-white border border-navy-100 px-6 hover:border-gold-300 hover:shadow-md transition-all duration-300"
+                  key={`${lender.name}-${i}`}
+                  className="inline-flex items-center justify-center min-w-[150px] h-16 rounded-xl bg-white border border-navy-100 px-6 hover:border-gold-300 hover:shadow-md transition-colors"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={`https://logo.clearbit.com/${l.domain}?size=80`}
-                    alt={l.name}
-                    className="h-8 max-w-[120px] object-contain"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.style.display = "none";
-                      const fallback = target.nextElementSibling as HTMLElement;
-                      if (fallback) fallback.style.display = "block";
-                    }}
+                    src={lender.logo}
+                    alt={lender.name}
+                    className="max-h-8 max-w-[120px] object-contain"
+                    loading="lazy"
                   />
-                  <span className="text-sm font-semibold text-navy-400 hidden">{l.name}</span>
                 </div>
               ))}
             </div>
